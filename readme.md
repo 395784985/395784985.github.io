@@ -35,6 +35,9 @@ git push -u origin main
 
 ### 4、github pages 设置
 
+vitepress 官方配置：
+https://vitepress.dev/zh/guide/deploy#github-pages
+
 deploy.yml设置
 ```
 # .github/workflows/deploy.yml
