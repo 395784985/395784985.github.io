@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: "395784985",
+  base: "/vitepress/",
   title: "adong",
   description: "adong site",
   themeConfig: {
