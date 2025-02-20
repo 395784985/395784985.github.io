@@ -4,22 +4,28 @@ layout: home
 
 hero:
   name: "adong"
-  text: "adong site"
-  tagline: My great project tagline
+  text: ""
+  tagline: "终生学习，有教无类"
+  image:
+    src: /image/banner.png
+    alt: 背景
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 工作经历
+      link: /job
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 学习经历
+      link: /study
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 高性能
+    icon: 🚀
+    details: 网站每秒支持10万PV，数据库支持1万QPS
+  - title: 高可用
+    icon: 🔥
+    details: 无感项目更新，高可用达到99.99%
+  - title: 高扩展
+    icon: 🛠️
+    details: 微服务模块，业务模块，可无限扩展
 ---
 
