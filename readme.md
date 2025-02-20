@@ -36,9 +36,68 @@ git push -u origin main
 ### 4、github pages 设置
 
 deploy.yml设置
+```
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
 
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build VitePress
+        run: pnpm docs:build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/.vitepress/dist
+          keep_files: false
+
+```
+
+选择 Actions>>>General
+
+在"工作流权限(Workflow permissions)"中，选择 Read and write permissions
 
 ### 5、参考连接
 
 https://www.jianshu.com/p/635c3ef1364a
 https://blog.csdn.net/2401_86574164/article/details/143261337
+
+
+### 6、报错
+
+```
+GitHub Action: The process ‘/usr/bin/git‘ failed with exit code 128
+```
+
+- 原因分析：
+默认情况下，新存储库没有适当的工作流权限。
+
+- 解决方案：
+转到存储库 Setting
+
+选择 Actions>>>General
+
+在"工作流权限(Workflow permissions)"中，选择 Read and write permissions
