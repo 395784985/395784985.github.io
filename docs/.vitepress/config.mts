@@ -52,7 +52,7 @@ export default defineConfig({
       { text: '技术体系', items: [
         { text: '基础', link: '/01-basic/' },
         { text: 'jvm', link: '/02-jvm/' },
-        // { text: '并发', link: '/03-concurrent/' },
+        { text: '并发', link: '/03-concurrent/' },
         // { text: '源码', link: '/04-source/' },
         // { text: '微服务', link: '/05-cloud/' },
         // { text: '中间件', link: '/06-soft/' },
@@ -69,8 +69,6 @@ export default defineConfig({
       // 调用 set_sidebar 动态生成侧边栏
       '/01-basic': set_sidebar('/01-basic'),
       '/02-jvm': set_sidebar('/02-jvm'),
-      '/03-concurrent': set_sidebar('/03-concurrent'),
-      '/04-source': set_sidebar('/04-source'),
     },
 
     socialLinks: [
