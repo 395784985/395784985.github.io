@@ -50,10 +50,16 @@ function getList(params, path1, pathname) {
 }
 
 export const set_sidebar = (pathname) => {
+    console.log("set_sidebar 1 ----> ", DIR_PATH, pathname);
+
     // 获取pathname的路径
-    const dirPath = path.join(DIR_PATH, pathname)
+    const dirPath = path.join(DIR_PATH, "docs", pathname)
+    console.log("set_sidebar 2 ----> ", dirPath);
+
     // 读取pathname下的所有文件或者文件夹
     const files = fs.readdirSync(dirPath)
+    console.log("set_sidebar 3 ----> ", files);
+
     // 过滤掉
     const items = intersections(files, WHITE_LIST)
     // getList 函数后面会讲到
