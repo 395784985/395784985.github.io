@@ -7,6 +7,14 @@ import {set_sidebar} from './gen_sidebar'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  head: [
+    // Google adsense
+    ['script', {
+        async: 'async',
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3661157653310294',
+        crossorigin: 'anonymous',
+    }],
+  ],
   base: "/",
   title: "adong",
   description: "adong 架构体系",
