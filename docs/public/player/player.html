@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线播放器</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/dplayer@1.27.1/dist/DPlayer.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .player-container {
+            margin-bottom: 20px;
+        }
+        .download-btn {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #777;
+        }
+        #dplayer {
+            width: 100%;
+            height: 500px;
+            max-height: 70vh;
+        }
+        @media (max-width: 768px) {
+            #dplayer {
+                height: 250px;
+            }
+        }
+        .share-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部菜单栏 -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">首页</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="https://gitee.com/system/apk/raw/master/adong-movie/app-debug.apk" target="_blank">下载APP</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <h1 class="text-center mb-4">在线播放器</h1>
+
+        <!-- 输入框和播放按钮 -->
+        <div class="input-group mb-3">
+            <input type="text" id="videoUrl" class="form-control" placeholder="请输入m3u8播放地址">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">历史记录</button>
+            <ul class="dropdown-menu dropdown-menu-end" id="historyList">
+                <!-- 历史记录将在这里动态加载 -->
+                <li><span class="dropdown-item-text">暂无历史记录</span></li>
+            </ul>
+            <button class="btn btn-success" type="button" id="playBtn">播放</button>
+        </div>
+
+        <!-- 播放器区域 -->
+        <div class="player-container">
+            <div id="dplayer"></div>
+        </div>
+
+        <!-- APP下载按钮 -->
+        <div class="download-btn">
+            <a href="https://gitee.com/system/apk/raw/master/adong-movie/app-debug.apk" target="_blank" class="btn btn-primary btn-lg">
+                点击下载APP获取更好体验
+            </a>
+        </div>
+
+        <!-- 底部版权信息 -->
+        <footer class="footer">
+            <p>&copy; 2025 在线播放器 版权所有</p>
+        </footer>
+    </div>
+
+    <!-- 引入JS库 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.5/dist/hls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dplayer@1.27.1/dist/DPlayer.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            let dp = null;
+            const MAX_HISTORY = 10;
+            let videoHistory = JSON.parse(localStorage.getItem('videoHistory')) || [];
+            
+            // 初始化历史记录
+            function updateHistoryList() {
+                if (videoHistory.length > 0) {
+                    $('#historyList').empty();
+                    videoHistory.forEach(function(url) {
+                        $('#historyList').append(`<li><a class="dropdown-item" href="#">${url}</a></li>`);
+                    });
+                }
+            }
+            
+            updateHistoryList();
+            
+            // 从URL参数加载
+            function getParameterByName(name) {
+                const url = window.location.href;
+                name = name.replace(/[\[\]]/g, '\\$&');
+                const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+                const results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+            
+            const urlParam = getParameterByName('url');
+            if (urlParam) {
+                $('#videoUrl').val(urlParam);
+                initPlayer(urlParam);
+            }
+            
+            // 初始化播放器
+            function initPlayer(url) {
+                if (dp) {
+                    dp.destroy();
+                }
+                
+                // 判断视频类型
+                let type;
+                if (url.includes('.m3u8')) {
+                    type = 'hls';
+                } else if (url.includes('.mp4')) {
+                    type = 'normal';
+                } else if (url.includes('.mp3')) {
+                    type = 'normal';
+                } else {
+                    alert('不支持的文件格式，请使用mp4、m3u8或mp3格式');
+                    return;
+                }
+                
+                dp = new DPlayer({
+                    container: document.getElementById('dplayer'),
+                    video: {
+                        url: url,
+                        type: type,
+                    },
+                    autoplay: true,
+                    theme: '#007bff',
+                    playbackSpeed: [0.5, 0.75, 1, 1.25, 1.5, 2],
+                    hotkey: true,
+                });
+                
+                // 保存到历史记录
+                if (!videoHistory.includes(url)) {
+                    videoHistory.unshift(url);
+                    if (videoHistory.length > MAX_HISTORY) {
+                        videoHistory.pop();
+                    }
+                    localStorage.setItem('videoHistory', JSON.stringify(videoHistory));
+                    updateHistoryList();
+                }
+            }
+            
+            // 播放按钮点击事件
+            $('#playBtn').click(function() {
+                const url = $('#videoUrl').val().trim();
+                if (url) {
+                    initPlayer(url);
+                } else {
+                    alert('请输入播放地址');
+                }
+            });
+            
+            // 历史记录点击事件
+            $('#historyList').on('click', '.dropdown-item', function(e) {
+                e.preventDefault();
+                const url = $(this).text();
+                $('#videoUrl').val(url);
+                initPlayer(url);
+            });
+            
+           
+        });
+    </script>
+</body>
+</html> 
