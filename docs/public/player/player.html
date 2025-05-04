@@ -7,42 +7,147 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/dplayer@1.27.1/dist/DPlayer.min.css" rel="stylesheet">
     <style>
+        :root {
+            --dark-bg: #1a1a1a;
+            --dark-secondary: #2d2d2d;
+            --dark-text: #e0e0e0;
+            --dark-border: #404040;
+            --accent-color: #4CAF50;
+            --accent-hover: #45a049;
+        }
+        
         body {
             padding-top: 20px;
             padding-bottom: 20px;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
         }
+        
         .navbar {
             margin-bottom: 20px;
+            background-color: var(--dark-secondary) !important;
         }
+        
+        .navbar-light .navbar-brand,
+        .navbar-light .navbar-nav .nav-link {
+            color: var(--dark-text) !important;
+        }
+        
+        .navbar-light .navbar-toggler {
+            border-color: var(--dark-border);
+            background-color: var(--dark-text);
+        }
+        
         .player-container {
             margin-bottom: 20px;
+            background-color: var(--dark-secondary);
+            padding: 20px;
+            border-radius: 8px;
         }
+        
+        .input-group .form-control {
+            background-color: var(--dark-secondary);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+        
+        .input-group .form-control::placeholder {
+            color: #888;
+        }
+        
+        .input-group .btn-primary {
+            background-color: #2196F3;
+            border-color: #2196F3;
+        }
+        
+        .input-group .btn-success {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        
+        .input-group .btn-success:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+        
+        .dropdown-menu {
+            background-color: var(--dark-secondary);
+            border-color: var(--dark-border);
+        }
+        
+        .dropdown-item {
+            color: var(--dark-text);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
         .download-btn {
             margin: 20px 0;
             text-align: center;
         }
+        
+        .download-btn .btn-primary {
+            background-color: #2196F3;
+            border-color: #2196F3;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn .btn-primary:hover {
+            background-color: #1976D2;
+            border-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+        }
+        
         .footer {
             margin-top: 30px;
             padding: 15px 0;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--dark-border);
             text-align: center;
-            color: #777;
+            color: #888;
         }
+        
         #dplayer {
             width: 100%;
             height: 500px;
             max-height: 70vh;
+            background-color: var(--dark-secondary);
         }
+        
         @media (max-width: 768px) {
             #dplayer {
                 height: 250px;
             }
         }
+        
         .share-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 1000;
+        }
+        
+        /* 自定义滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark-border);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     </style>
 </head>
@@ -69,7 +174,7 @@
 
         <!-- 输入框和播放按钮 -->
         <div class="input-group mb-3">
-            <input type="text" id="videoUrl" class="form-control" placeholder="请输入m3u8播放地址">
+            <input type="text" id="videoUrl" class="form-control" placeholder="请输入播放地址">
             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">历史记录</button>
             <ul class="dropdown-menu dropdown-menu-end" id="historyList">
                 <!-- 历史记录将在这里动态加载 -->
