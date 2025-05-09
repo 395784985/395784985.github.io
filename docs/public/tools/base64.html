@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 编解码工具</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #1a1a1a;
+            --dark-secondary: #2d2d2d;
+            --dark-border: #404040;
+            --dark-text: #e0e0e0;
+        }
+        
+        body {
+            padding: 20px;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        .conversion-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .conversion-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-control {
+            background-color: var(--dark-secondary);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+            flex: 1;
+        }
+        
+        .form-control:focus {
+            background-color: var(--dark-secondary);
+            border-color: #0d6efd;
+            color: var(--dark-text);
+        }
+        
+        .form-control[readonly] {
+            background-color: var(--dark-secondary);
+            color: var(--dark-text);
+            opacity: 0.8;
+        }
+        
+        .btn-group {
+            margin: 10px 0;
+        }
+        
+        .error {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+        
+        .form-label {
+            margin-bottom: 0.5rem;
+            color: var(--dark-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Base64 编解码工具</h2>
+        
+        <div class="btn-group" role="group">
+            <button id="encodeBtn" class="btn btn-primary">编码</button>
+            <button id="decodeBtn" class="btn btn-secondary">解码</button>
+            <button id="clearBtn" class="btn btn-danger">清空</button>
+            <button id="copyBtn" class="btn btn-success">复制</button>
+        </div>
+
+        <div class="conversion-container">
+            <div class="conversion-area">
+                <label class="form-label">输入文本：</label>
+                <textarea id="input" class="form-control" placeholder="请输入要转换的文本"></textarea>
+            </div>
+            <div class="conversion-area">
+                <label class="form-label">转换结果：</label>
+                <textarea id="output" class="form-control" readonly></textarea>
+            </div>
+        </div>
+        
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Base64编码
+            function encodeBase64() {
+                const input = $('#input').val();
+                if (!input) {
+                    $('#errorMsg').text('请输入要编码的文本');
+                    $('#output').val('');
+                    return;
+                }
+                try {
+                    const encoded = btoa(unescape(encodeURIComponent(input)));
+                    $('#output').val(encoded);
+                    $('#errorMsg').text('');
+                } catch (e) {
+                    $('#errorMsg').text('编码失败：' + e.message);
+                    $('#output').val('');
+                }
+            }
+
+            // Base64解码
+            function decodeBase64() {
+                const input = $('#input').val();
+                if (!input) {
+                    $('#errorMsg').text('请输入要解码的Base64文本');
+                    $('#output').val('');
+                    return;
+                }
+                try {
+                    const decoded = decodeURIComponent(escape(atob(input)));
+                    $('#output').val(decoded);
+                    $('#errorMsg').text('');
+                } catch (e) {
+                    $('#errorMsg').text('解码失败：无效的Base64编码');
+                    $('#output').val('');
+                }
+            }
+
+            // 编码按钮
+            $('#encodeBtn').click(encodeBase64);
+            
+            // 解码按钮
+            $('#decodeBtn').click(decodeBase64);
+            
+            // 清空按钮
+            $('#clearBtn').click(function() {
+                $('#input').val('');
+                $('#output').val('');
+                $('#errorMsg').text('');
+            });
+            
+            // 复制按钮
+            $('#copyBtn').click(function() {
+                const output = $('#output').val();
+                if (output) {
+                    navigator.clipboard.writeText(output).then(function() {
+                        alert('已复制到剪贴板');
+                    }).catch(function() {
+                        // 降级处理
+                        const textarea = document.createElement('textarea');
+                        textarea.value = output;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        alert('已复制到剪贴板');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

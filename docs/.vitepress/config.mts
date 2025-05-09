@@ -57,13 +57,14 @@ export default defineConfig({
     },
     nav: [
       { text: '首页', link: '/' },
+      { text: '笔记', link: '/03-notepad/' },
       { text: '归档', items: [
         { text: '基础', link: '/01-basic/' },
         { text: 'Java', link: '/02-java/' },
       ]},
-      { text: '笔记', link: '/03-notepad/' },
       { text: '小工具', items:[
-        { text: '视频播放器', link: '/player/player.html' },
+        { text: '在线工具', link: 'https://395784985.github.io/tools/tools.html' },
+        { text: '视频播放器', link: 'https://395784985.github.io/player/player.html' },
       ]},
     ],
 

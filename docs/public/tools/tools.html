@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线工具集合</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #1a1a1a;
+            --dark-secondary: #2d2d2d;
+            --dark-border: #404040;
+            --dark-text: #e0e0e0;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        .navbar {
+            background-color: var(--dark-secondary) !important;
+            border-bottom: 1px solid var(--dark-border);
+        }
+        
+        .navbar-brand, .nav-link {
+            color: var(--dark-text) !important;
+        }
+        
+        .nav-link:hover {
+            color: #0d6efd !important;
+        }
+        
+        .nav-link.active {
+            color: #0d6efd !important;
+            font-weight: bold;
+        }
+        
+        .content-wrapper {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .tool-frame {
+            width: 100%;
+            height: calc(100vh - 200px);
+            border: none;
+            border-radius: 8px;
+            background-color: var(--dark-secondary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .footer {
+            padding: 20px 0;
+            background-color: var(--dark-secondary);
+            border-top: 1px solid var(--dark-border);
+            text-align: center;
+            margin-top: auto;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">在线工具集</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-tool="json.html">JSON格式化</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-tool="base64.html">Base64转换</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-tool="qrcode.html">二维码生成</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-tool="haibao.html">海报生成</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 内容区域 -->
+    <div class="content-wrapper container">
+        <iframe id="toolFrame" class="tool-frame" src="json.html"></iframe>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 在线工具集合 版权所有</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 处理导航点击
+            $('.nav-link').click(function(e) {
+                e.preventDefault();
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+                
+                const toolPage = $(this).data('tool');
+                $('#toolFrame').attr('src', toolPage);
+            });
+        });
+    </script>
+</body>
+</html> 
