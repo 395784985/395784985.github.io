@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   base: "/",
   title: "adong",
-  description: "adong 架构体系",
+  description: "adong 个人主页",
   lang: 'zh-CN',
   ignoreDeadLinks: true,
   markdown: {
@@ -29,7 +29,7 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    siteTitle: '技术体系',
+    siteTitle: '个人主页',
     logo: 'logo.png',
     search: {
       provider: 'local', // 可以开启本地搜索
@@ -57,15 +57,13 @@ export default defineConfig({
     },
     nav: [
       { text: '首页', link: '/' },
-      { text: '技术体系', items: [
+      { text: '归档', items: [
         { text: '基础', link: '/01-basic/' },
-        { text: 'jvm', link: '/02-jvm/' },
-        { text: '并发', link: '/03-concurrent/' },
-        // { text: '源码', link: '/04-source/' },
-        // { text: '微服务', link: '/05-cloud/' },
-        // { text: '中间件', link: '/06-soft/' },
-        // { text: '服务器', link: '/07-linux/' },
-        // { text: '性能', link: '/08-performence/' },
+        { text: 'Java', link: '/02-java/' },
+      ]},
+      { text: '笔记', link: '/03-notepad/' },
+      { text: '小工具', items:[
+        { text: '视频播放器', link: '/public/player/player.html' },
       ]},
     ],
 
@@ -76,7 +74,8 @@ export default defineConfig({
     sidebar: {
       // 调用 set_sidebar 动态生成侧边栏
       '/01-basic': set_sidebar('/01-basic'),
-      '/02-jvm': set_sidebar('/02-jvm'),
+      '/02-java': set_sidebar('/02-java'),
+      '/03-notepad': set_sidebar('/03-notepad'),
     },
 
     socialLinks: [
