@@ -63,7 +63,7 @@ export default defineConfig({
       ]},
       { text: '笔记', link: '/03-notepad/' },
       { text: '小工具', items:[
-        { text: '视频播放器', link: '/public/player/player.html' },
+        { text: '视频播放器', link: '/player/player.html' },
       ]},
     ],
 
