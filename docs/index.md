@@ -11,11 +11,11 @@ hero:
     alt: 背景
   actions:
     - theme: brand
-      text: 工作经历
-      link: /job.md
+      text: 前端网站
+      link: "https://hb114.eu.org/"
     - theme: alt
-      text: 学习经历
-      link: /study.md
+      text: 后台管理
+      link: "https://admin.hb114.eu.org/"
 
 features:
   - title: 高性能
