@@ -13,9 +13,13 @@ hero:
     - theme: brand
       text: 前端网站
       link: "https://hb114.eu.org/"
+    - theme: brand
+      text: 我的博客
+      link: "https://blog.hb114.eu.org/"
     - theme: alt
       text: 后台管理
       link: "https://admin.hb114.eu.org/"
+
 
 features:
   - title: 高性能
