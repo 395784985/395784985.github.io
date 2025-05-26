@@ -11,11 +11,11 @@ hero:
     alt: 背景
   actions:
     - theme: brand
-      text: 前端网站
-      link: "https://hb114.eu.org/"
-    - theme: brand
       text: 我的博客
       link: "https://blog.hb114.eu.org/"
+    - theme: brand
+      text: 前端网站
+      link: "https://hb114.eu.org/"
     - theme: alt
       text: 后台管理
       link: "https://admin.hb114.eu.org/"
@@ -36,3 +36,13 @@ features:
 ## 个人简介
 
 10年以上Java开发经验，总结Java技术体系，擅长电商、支付结算、数据可视化等方面架构设计与开发。精通Java架构知识体系，包含微服务框架、分布式框架、大数据处理等领域。
+
+<script setup>
+import AdsAside from './components/AdsAside.vue';
+import AdsAuto from './components/AdsAuto.vue';
+
+</script>
+
+<AdsAside />
+
+<AdsAuto />
