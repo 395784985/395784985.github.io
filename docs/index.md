@@ -11,13 +11,13 @@ hero:
     alt: 背景
   actions:
     - theme: brand
-      text: 我的博客
-      link: "https://blog.hb114.eu.org/"
-    - theme: brand
-      text: 前端网站
+      text: 个人博客
       link: "https://hb114.eu.org/"
+    - theme: brand
+      text:  内容展示
+      link: "https://adong.hb114.eu.org/"
     - theme: alt
-      text: 后台管理
+      text:  企业管理
       link: "https://admin.hb114.eu.org/"
 
 
