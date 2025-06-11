@@ -11,7 +11,7 @@ onMounted(() => {
 })
 </script>
 
-<!-- aside 自适应 -->
+<!-- aside 展示广告 -->
 <template>
   <div class="gads">
   <ins class="adsbygoogle"

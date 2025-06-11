@@ -39,10 +39,10 @@ features:
 
 <script setup>
 import AdsAside from './components/AdsAside.vue';
-import AdsAuto from './components/AdsAuto.vue';
+// import AdsAuto from './components/AdsAuto.vue';
 
 </script>
 
 <AdsAside />
 
-<AdsAuto />
+<!-- <AdsAuto /> -->
