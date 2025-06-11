@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "adong"
   text: ""
-  tagline: "终生学习，有教无类"
+  tagline: "Java架构图，十年磨一剑，欢迎观看~"
   image:
     src: /image/banner.png
     alt: 背景
@@ -13,7 +13,7 @@ hero:
     - theme: brand
       text: 个人博客
       link: "https://hb114.eu.org/"
-    - theme: brand
+    - theme: alt
       text:  内容展示
       link: "https://adong.hb114.eu.org/"
     - theme: alt
@@ -33,16 +33,26 @@ features:
     details: 微服务模块，业务模块，可无限扩展
 ---
 
-## 个人简介
+## 部署图
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block; width:100%; height:500px;" src="https://www.processon.com/embed/604b1c5707912945c314a225"></iframe>
 
-10年以上Java开发经验，总结Java技术体系，擅长电商、支付结算、数据可视化等方面架构设计与开发。精通Java架构知识体系，包含微服务框架、分布式框架、大数据处理等领域。
+## 组件图
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block; width:100%; height:500px;" src="https://www.processon.com/embed/604b1c6107912945c314a26a"></iframe>
+
+<AdsAside />
+
+## 时序图
+
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block; width:100%; height:500px;" src="https://www.processon.com/embed/604b1c5c5653bb61d3f52945"></iframe>
+
+## 类图
+
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block; width:100%; height:500px;" src="https://www.processon.com/embed/604b1c6b7d9c08389fdc20d4"></iframe>
 
 <script setup>
 import AdsAside from './components/AdsAside.vue';
 // import AdsAuto from './components/AdsAuto.vue';
 
 </script>
-
-<AdsAside />
 
 <!-- <AdsAuto /> -->
